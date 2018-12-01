@@ -1,1 +1,22 @@
-<h1>hello <%= name %></h1>
+<% include partials/head %>
+
+<body onload="getMap()">
+    <div id="map"></div>
+    <div id="search">
+        <div class="search-input-group">
+            <div class="search-icon" type="button"></div>
+            <input id="search-input" type="text" placeholder="Search">
+        </div>
+        <ul id="results-panel"></ul>
+    </div>
+
+   <script>
+        $.getJSON("/data", function(data) {
+              data["ResultList"].forEach(item => {
+                  var loc = item["location"]
+                  addHistoricPlace(loc);
+               });
+          })
+    </script>
+</body>
+<% include partials/footer %>
